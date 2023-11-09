@@ -6,13 +6,7 @@
 <div class="ContainerDetailGrammar">
     <div id="navigation" style="margin-right: 10px">
         <p style="text-align: center"><strong>Mục lục</strong></p>
-        <ul class="list-group">
-            @foreach (var item in MucLuc)
-            {
-                <li class="list-group-item active">@item.TenNguPhap</li>
-            }
-
-        </ul>
+        @Html.Action("MucLuc", "Grammar");
     </div>
     <div id="extra">
         @Html.Raw(Model.NoiDung)

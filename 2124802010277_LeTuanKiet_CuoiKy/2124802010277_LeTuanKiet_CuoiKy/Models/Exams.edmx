@@ -17,6 +17,7 @@
           <Property Name="DiemTrungBinh" Type="float" />
           <Property Name="LuotThich" Type="int" />
           <Property Name="LuotXem" Type="int" />
+          <Property Name="TrangThai" Type="bit" />
         </EntityType>
         <EntityType Name="CauHoi">
           <Key>
@@ -221,6 +222,7 @@
           <Property Name="DiemTrungBinh" Type="Double" />
           <Property Name="LuotThich" Type="Int32" />
           <Property Name="LuotXem" Type="Int32" />
+          <Property Name="TrangThai" Type="Boolean" />
         </EntityType>
         <EntityType Name="CauHoi">
           <Key>
@@ -352,6 +354,7 @@
           <EntitySetMapping Name="BaiTaps">
             <EntityTypeMapping TypeName="DataTiengAnhModel.BaiTap">
               <MappingFragment StoreEntitySet="BaiTap">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
                 <ScalarProperty Name="LuotThich" ColumnName="LuotThich" />
                 <ScalarProperty Name="DiemTrungBinh" ColumnName="DiemTrungBinh" />

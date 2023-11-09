@@ -12,6 +12,7 @@
     <Property Name="DiemTrungBinh" Type="float" />
     <Property Name="LuotThich" Type="int" />
     <Property Name="LuotXem" Type="int" />
+    <Property Name="TrangThai" Type="bit" />
   </EntityType>
   <EntityType Name="CauHoi">
     <Key>

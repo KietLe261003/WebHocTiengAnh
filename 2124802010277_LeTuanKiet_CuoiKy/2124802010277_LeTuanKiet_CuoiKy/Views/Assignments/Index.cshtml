@@ -18,25 +18,27 @@
                         <h3 class="text-danger">Q.</h3>
                         <h5 class="mt-1 ml-2" id="Question"></h5>
                     </div>
-                    <div class="ans ml-2">
-                        <label class="radio">
-                            <input type="radio" name="ans" id="valuA" onclick="ChooseUser()"> <span id="ansA"></span>
-                        </label>
-                    </div>
-                    <div class="ans ml-2">
-                        <label class="radio">
-                            <input type="radio" name="ans" id="valuB" onclick="ChooseUser()"> <span id="ansB"></span>
-                        </label>
-                    </div>
-                    <div class="ans ml-2">
-                        <label class="radio">
-                            <input type="radio" name="ans" id="valuC" onclick="ChooseUser()"> <span id="ansC"></span>
-                        </label>
-                    </div>
-                    <div class="ans ml-2">
-                        <label class="radio">
-                            <input type="radio" name="ans" id="valuD" onclick="ChooseUser()"> <span id="ansD"></span>
-                        </label>
+                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center">
+                        <div class="ans ml-2">
+                            <label class="radio">
+                                <input type="radio" name="ans" id="valuA" onclick="ChooseUser()"> <span id="ansA"></span>
+                            </label>
+                        </div>
+                        <div class="ans ml-2">
+                            <label class="radio">
+                                <input type="radio" name="ans" id="valuB" onclick="ChooseUser()"> <span id="ansB"></span>
+                            </label>
+                        </div>
+                        <div class="ans ml-2">
+                            <label class="radio">
+                                <input type="radio" name="ans" id="valuC" onclick="ChooseUser()"> <span id="ansC"></span>
+                            </label>
+                        </div>
+                        <div class="ans ml-2">
+                            <label class="radio">
+                                <input type="radio" name="ans" id="valuD" onclick="ChooseUser()"> <span id="ansD"></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
@@ -55,9 +57,7 @@
     Nộp bài
 </button>
 <div class="container">
-
     <div class="row">
-
         <div class="four col-md-3">
             <div class="counter-box colored">
                 <i class="fa fa-thumbs-o-up"></i>
@@ -68,22 +68,15 @@
         <div class="four col-md-3">
             <div class="counter-box">
                 <i class="fa fa-group"></i>
-                <span class="counter">@Bt.LuotXem</span>
+                <span class="counter">@Bt.SoLuotNop</span>
                 <p>Lượt làm bài</p>
             </div>
         </div>
         <div class="four col-md-3">
             <div class="counter-box">
-                <i class="fa  fa-shopping-cart"></i>
+                <i class="bi bi-backpack2"></i>
                 <span class="counter">@Bt.DiemTrungBinh</span>
                 <p>Điểm trung bình</p>
-            </div>
-        </div>
-        <div class="four col-md-3">
-            <div class="counter-box">
-                <i class="fa  fa-user"></i>
-                <span class="counter">1563</span>
-                <p>Tỷ lệ >= 8</p>
             </div>
         </div>
     </div>
@@ -91,11 +84,11 @@
 <script>
     var id = 0;
 
-    var Lquestion = @Html.Raw(Json.Encode(Model));
-    console.log(Lquestion);
+var Lquestion = @Html.Raw(Json.Encode(Model));
+console.log(Lquestion);
     var AnsUser = [];
-    var Point = [];
-    console.log(Lquestion);
+var Point = [];
+console.log(Lquestion);
 
     @* set data cho html start *@
     var Q = document.getElementById('Question').innerHTML = Lquestion[0].Ques;
@@ -198,11 +191,22 @@
 
     function End() {
         var pointUser = 0;
+        var Wr = 0;
+        var ChuaLam = 0;
         for (let i = 0; i < Lquestion.length; i++) {
             if (Point[i] != null && Point[i] == Lquestion[i].Ans) {
                 pointUser++;
             }
+            if (Point[i] != null && Point[i] != Lquestion[i].Ans) {
+                //console.log(Point[i] + ' ' + Lquestion[i].DapAnDung);
+                Wr++;
+                console.log(Point[i] + ' ' + Lquestion[i].Ans);
+            }
+            if (Point[i] == null)
+                ChuaLam++;
         }
+        window.location.href = '/Assignments/SavePoint?Acp=' + pointUser + '&Wr=' + Wr + '&AllQues=' + Lquestion.length + '&ChuaLam=' + ChuaLam + '&ChosseUser=' + Point + '&IdBaiTap=' + Lquestion[0].IdBaiTap;
         console.log(pointUser);
+        //console.log('/Assignments/ShowPoint?Acp=' + pointUser + '&Wr=' + Wr + '&AllQues=' + Lquestion.length + '&ChuaLam=' + ChuaLam + '&ChosseUser=' + Point + '&IdBaiTap=' + Lquestion[0].IdBaiTap);
     }
 </script>

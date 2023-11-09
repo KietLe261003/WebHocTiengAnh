@@ -67,6 +67,7 @@
     <Property Name="DiemTrungBinh" Type="Double" />
     <Property Name="LuotThich" Type="Int32" />
     <Property Name="LuotXem" Type="Int32" />
+    <Property Name="TrangThai" Type="Boolean" />
   </EntityType>
   <EntityType Name="CauHoi">
     <Key>

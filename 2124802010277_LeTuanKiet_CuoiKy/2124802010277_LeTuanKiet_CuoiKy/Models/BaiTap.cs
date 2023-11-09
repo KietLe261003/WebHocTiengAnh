@@ -22,5 +22,6 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Models
         public Nullable<double> DiemTrungBinh { get; set; }
         public Nullable<int> LuotThich { get; set; }
         public Nullable<int> LuotXem { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
     }
 }

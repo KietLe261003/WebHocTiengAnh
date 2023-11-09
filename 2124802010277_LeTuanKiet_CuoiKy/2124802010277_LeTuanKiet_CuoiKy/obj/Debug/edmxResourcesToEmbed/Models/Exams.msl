@@ -44,6 +44,7 @@
     <EntitySetMapping Name="BaiTaps">
       <EntityTypeMapping TypeName="DataTiengAnhModel.BaiTap">
         <MappingFragment StoreEntitySet="BaiTap">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
           <ScalarProperty Name="LuotThich" ColumnName="LuotThich" />
           <ScalarProperty Name="DiemTrungBinh" ColumnName="DiemTrungBinh" />

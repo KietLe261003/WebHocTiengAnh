@@ -38,8 +38,6 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-
-            
             List<NguoiDung> ds = db.NguoiDungs.OrderByDescending(item => item.DiemKyThi).Take(10).ToList();
             ViewBag.Top10 = ds;
 

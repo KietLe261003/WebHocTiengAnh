@@ -132,6 +132,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerAssignmentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerExamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerGrammarController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
@@ -189,6 +196,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Css\User.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1706,6 +1714,22 @@
     <Content Include="css\AdminPage\scss\widgets\widgets.scss" />
     <Content Include="js\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="js\ckfinder\userfiles\.htaccess" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUser\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerGrammar\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerAssignment\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerExams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerExams\CreateExams.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerExams\DetailExams.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerExams\EditExams.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerGrammar\ListGrammar.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerGrammar\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerGrammar\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerGrammar\test.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerAssignment\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2158,9 +2182,13 @@
     <Content Include="Views\Exams\ShowPoint.cshtml" />
     <Content Include="Views\Admin\DetailExams.cshtml" />
     <Content Include="Views\Admin\EditExams.cshtml" />
+    <Content Include="Views\Grammar\MucLuc.cshtml" />
+    <Content Include="Views\Assignments\ShowPoint.cshtml" />
+    <Content Include="Views\Assignments\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="DATA\" />
     <Folder Include="icon\" />
     <Folder Include="Views\Login\" />

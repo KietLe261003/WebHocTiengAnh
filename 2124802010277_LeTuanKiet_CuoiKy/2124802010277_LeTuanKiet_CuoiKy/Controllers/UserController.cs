@@ -76,6 +76,7 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
                 kh.NgaySinh = DateTime.Parse(dNgaySinh);
                 kh.GioiTinh = bool.Parse(data["GioiTinh"]);
                 kh.HinhDaiDien = sHinhAnh;
+                kh.DiemKyThi = 0;
                 db.NguoiDungs.Add(kh);
                 db.SaveChanges();
                 return RedirectToAction("DangNhap");
@@ -101,7 +102,7 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
             }
             else
             {
-                NguoiDung kh = db.NguoiDungs.SingleOrDefault(item => item.TenDN == TenDN && item.MatKhau == Password);
+                NguoiDung kh = db.NguoiDungs.SingleOrDefault(item => item.TenDN == TenDN && item.MatKhau == Password && item.Admin==true);
                 if (kh != null)
                 {
                     Session["TaiKhoan"] = kh;

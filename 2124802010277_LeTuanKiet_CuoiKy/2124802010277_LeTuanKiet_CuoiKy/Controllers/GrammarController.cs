@@ -12,7 +12,7 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
         // GET: Grammar
         public ActionResult Index()
         {
-            List<NguPhap> tmp = db.NguPhaps.ToList();
+            List<NguPhap> tmp = db.NguPhaps.Where(item=> item.TrangThai==true).ToList();
             ViewBag.TaiKhoan = db.NguoiDungs.ToList();
             return View(tmp);
         }
@@ -53,9 +53,17 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
         public ActionResult DetailGrammar(int id)
         {
             NguPhap tmp = db.NguPhaps.FirstOrDefault(item => item.IdNguPhap == id);
-            ViewBag.MucLuc = db.NguPhaps.ToList();
-            
+            if(tmp!=null)
+            {
+                tmp.LuotXem += 1;
+                db.SaveChanges();
+            }    
             return View(tmp);
+        }
+        public ActionResult MucLuc()
+        {
+            List<NguPhap> tmp = db.NguPhaps.ToList();
+            return PartialView(tmp);
         }
         /*Chi tiết 1 ngữ pháp end*/
     }

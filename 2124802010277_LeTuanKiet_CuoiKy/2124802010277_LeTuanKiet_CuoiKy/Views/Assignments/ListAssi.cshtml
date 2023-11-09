@@ -33,7 +33,7 @@
             {
                 x = db.NguoiDungs.FirstOrDefault(n => n.MaKH == item.TacGia);
                 <tr>
-                    <th scope="row"><a href="@Url.Action("Index","Assignments", new { id=item.IdBaiTap})">@item.TenBaiTap</a></th>
+                    <th scope="row"><a href="@Url.Action("TangLuotXem","Assignments", new { id=item.IdBaiTap})">@item.TenBaiTap</a></th>
                     <td class="DetailExams">@string.Format("{0:dd/MM/yyyy}", item.NgayDang)</td>
                     <td class="DetailExams">@x.HoTenKH</td>
                     <td class="DetailExams" style="text-align: center">@item.DiemTrungBinh</td>

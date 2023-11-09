@@ -17,6 +17,7 @@ namespace _2124802010277_LeTuanKiet_CuoiKy
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                , namespaces: new[] { "_2124802010277_LeTuanKiet_CuoiKy.Controllers" }
             );
         }
     }

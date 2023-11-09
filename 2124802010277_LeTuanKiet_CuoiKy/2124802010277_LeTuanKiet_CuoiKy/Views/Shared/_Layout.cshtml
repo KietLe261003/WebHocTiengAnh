@@ -195,7 +195,7 @@
 
     <!-- sidebar -->
     <script src="~/js/custom.js"></script>
-    @RenderSection("scripts", false);
+
     <script>
         AOS.init();
     </script>
@@ -206,6 +206,7 @@
     @*page pulugin ckeditor and finder*@
     <script src="~/js/ckfinder/ckfinder.js"></script>
     <script src="~/js/ckeditor/ckeditor.js"></script>
+    @RenderSection("scripts", false);
 
 </body>
 </html>

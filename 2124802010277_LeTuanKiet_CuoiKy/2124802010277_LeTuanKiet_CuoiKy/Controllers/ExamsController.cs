@@ -133,8 +133,6 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
             tmp.Sai = Wr;
             tmp.ChuaLam = ChuaLam;
             db.SaveChanges();
-
-            
             ViewBag.SoCauHoi = AllQues;
             return View(tmp);
         }

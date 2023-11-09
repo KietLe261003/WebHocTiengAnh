@@ -10,15 +10,24 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
     {
         DataTiengAnhEntities db = new DataTiengAnhEntities();
         // GET: Assignments
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
+            int id = (int)Session["Id"];
+            var x = db.BaiTaps.FirstOrDefault(item => item.IdBaiTap == id);
             List<ChiTietBaiTap> tmp = db.ChiTietBaiTaps.Where(item => item.IdBaiTap == id).ToList();
-            
-            var x= db.BaiTaps.FirstOrDefault(item => item.IdBaiTap == id);
-            x.LuotXem += 1;
-            db.SaveChanges();
             ViewBag.BaiTap = x;
             return View(tmp);
+        }
+        public ActionResult TangLuotXem(int id)
+        {
+            Session["Id"] = id;
+            var x = db.BaiTaps.FirstOrDefault(item => item.IdBaiTap == id);
+            if (x != null)
+            {
+                x.LuotXem += 1;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
         public ActionResult ListAssi(int pg=1)
         {
@@ -97,5 +106,68 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
             return RedirectToAction("CreateAssignment");
         }
 
+       /* Show điểm của người dùng*/
+       void savePoint(int Acp,int AllQues,int IdBaiTap)
+        {
+            BaiTap bt = db.BaiTaps.FirstOrDefault(item => item.IdBaiTap == IdBaiTap);
+            bt.DiemTrungBinh += (double)Acp / AllQues * 10;
+            db.SaveChanges();
+        }
+       public ActionResult ShowPoint()
+        {
+            int IdBaiTap = (int)Session["IdBaiTap"];
+            if(Session["Diem"]!=null)
+            {
+                ViewBag.Diem = Session["Diem"];
+            }
+            if (Session["SoCauHoi"] != null)
+            {
+                ViewBag.SoCauHoi = Session["SoCauHoi"];
+            }
+            if (Session["SoCauDung"] != null)
+            {
+                ViewBag.SoCauDung = Session["SoCauDung"];
+            }
+            if (Session["SoCauSai"] != null)
+            {
+                ViewBag.SoCauSai = Session["SoCauSai"];
+            }
+            if (Session["SoCauChuaLam"] != null)
+            {
+                ViewBag.SoCauChuaLam = Session["SoCauChuaLam"];
+            }
+            if (Session["LuaChon"] != null)
+            {
+                List<string> Chosice = (List<String>)Session["LuaChon"];
+                ViewBag.tmp = Chosice;
+            }
+            List<ChiTietBaiTap> tmp = db.ChiTietBaiTaps.Where(item => item.IdBaiTap == IdBaiTap).ToList();
+            return View(tmp);
+        }
+        public ActionResult SavePoint(int Acp, int Wr, int AllQues, int ChuaLam, string ChosseUser, int IdBaiTap)
+        {
+            Session["Diem"] = (double)Acp / AllQues * 10;
+            Session["SoCauHoi"] = AllQues;
+            Session["SoCauDung"] = Acp;
+            Session["SoCauSai"] = Wr;
+            Session["SoCauChuaLam"] = ChuaLam;
+            List<string> Chosice = ChosseUser.Split(',').ToList();
+            Session["IdBaiTap"] = IdBaiTap;
+            Session["LuaChon"] = Chosice;
+        
+            BaiTap bt = db.BaiTaps.FirstOrDefault(item => item.IdBaiTap == IdBaiTap);
+            double Diem = (double)Acp / AllQues * 10;
+            double sum = (double)bt.SoLuotNop * (double)bt.DiemTrungBinh;
+            sum += Diem;
+            bt.SoLuotNop++;
+            bt.DiemTrungBinh =sum/bt.SoLuotNop;
+            
+            db.SaveChanges();
+            return RedirectToAction("ShowPoint");
+        }
+        public ActionResult test()
+        {
+            return View();
+        }
     }
 }

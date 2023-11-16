@@ -12,7 +12,7 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Areas.Admin.Controllers
         DataTiengAnhEntities db = new DataTiengAnhEntities();
         public ActionResult Index()
         {
-            List<KyThi> tmp = db.KyThis.ToList();
+            List<KyThi> tmp = db.KyThis.OrderByDescending(item => item.NgayKetThuc).ToList();
             return View(tmp);
         }
         public ActionResult CreateExams()
@@ -65,7 +65,7 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Areas.Admin.Controllers
             //Thêm các câu hỏi của kỳ thi end
 
             Session["IdKyThi"] = data["IdKyThi"];
-            return View();
+            return RedirectToAction("Index");
         }
         public ActionResult DetailExams(string id)
         {
@@ -132,6 +132,36 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Areas.Admin.Controllers
             List<CauHoi> tmp = db.CauHois.Where(item => item.IdBoCauHoi == id).ToList();
             ViewBag.DanhSachCauHoi = tmp;
             return View(kt);
+        }
+        [HttpPost] 
+        public ActionResult EditExams(FormCollection f,List<CauHoi> LQuestion)
+        {
+            string IdKyThi = f["IdKyThi"];
+            string TenKyThi = f["TenKyThi"];
+            DateTime Ngay = DateTime.Parse(f["Ngay"]);
+            Ngay = Ngay.AddHours(Convert.ToInt32(f["Hour"]));
+            Ngay = Ngay.AddMinutes(Convert.ToInt32(f["Minute"]));
+
+            DateTime NgayKt = DateTime.Parse(f["NgayKetThuc"]);
+            NgayKt = NgayKt.AddHours(Convert.ToInt32(f["HourEnd"]));
+            NgayKt = NgayKt.AddMinutes(Convert.ToInt32(f["MinuteEnd"]));
+
+            Boolean TinhTrang = Boolean.Parse(f["TinhTrang"]);
+
+            KyThi kt = db.KyThis.FirstOrDefault(item => item.IdKyThi == IdKyThi);
+            kt.TenKyThi = TenKyThi;
+            kt.Ngay = Ngay;
+            kt.NgayKetThuc = NgayKt;
+
+            kt.CauHois.Clear();
+            List<CauHoi> lq = LQuestion.Where(item => item.TenCauHoi!=null && item.DapAnA!=null && item.DapAnB!=null && item.DapAnC!=null && item.DapAnD!=null && item.DapAnDung!=null ).ToList();
+            foreach(var item in lq)
+            {
+                item.IdBoCauHoi = IdKyThi;
+            }    
+            kt.CauHois = lq;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         /*Quản lý kì thi end*/
     }

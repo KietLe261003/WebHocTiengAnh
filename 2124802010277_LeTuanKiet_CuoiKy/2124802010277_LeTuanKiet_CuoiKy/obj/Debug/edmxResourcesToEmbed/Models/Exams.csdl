@@ -17,6 +17,8 @@
       <End Role="KyThi" EntitySet="KyThis" />
       <End Role="ChiTietThiSinh" EntitySet="ChiTietThiSinhs" />
     </AssociationSet>
+    <EntitySet Name="Messages" EntityType="DataTiengAnhModel.Message" />
+    <EntitySet Name="Rooms" EntityType="DataTiengAnhModel.Room" />
   </EntityContainer>
   <EntityType Name="sysdiagram">
     <Key>
@@ -150,4 +152,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdNguoiDung" Type="Int32" Nullable="false" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gio" Type="DateTime" Precision="3" />
+    <Property Name="RoomId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="RoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

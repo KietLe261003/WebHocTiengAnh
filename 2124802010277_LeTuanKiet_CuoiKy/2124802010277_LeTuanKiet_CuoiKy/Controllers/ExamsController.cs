@@ -10,10 +10,22 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
     {
         DataTiengAnhEntities db = new DataTiengAnhEntities();
         // GET: Exams
-        public ActionResult Index()
+        public ActionResult Index(int pg = 1)
         {
             List<KyThi> tmp = db.KyThis.ToList();
-            return View(tmp);
+            const int pageSize = 20;
+            if (pg < 1)
+                pg = 1;
+
+            int totalitem = tmp.Count();
+
+            var pager = new Pager(totalitem, pg, pageSize);
+
+            int skipPage = (pg - 1) * pageSize;
+            List<KyThi> tmp1 = tmp.OrderByDescending(item => item.NgayKetThuc).Skip(skipPage).Take(pageSize).ToList();
+            ViewBag.Pager = pager;
+
+            return View(tmp1);
         }
 
         /*Tạo 1 kỳ thi start*/
@@ -127,14 +139,30 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
             string IdKyThi1 = (string)Session["IdKyThi"];
             NguoiDung nd = (NguoiDung)Session["TaiKhoan"];
 
-            ChiTietThiSinh tmp = db.ChiTietThiSinhs.FirstOrDefault(item=>item.IdKyThi==IdKyThi1 && item.IdThiSinh==nd.MaKH);
-            tmp.Diem = point;
-            tmp.Dung = Acp;
-            tmp.Sai = Wr;
-            tmp.ChuaLam = ChuaLam;
-            db.SaveChanges();
-            ViewBag.SoCauHoi = AllQues;
-            return View(tmp);
+            KyThi kt = db.KyThis.FirstOrDefault(item => item.IdKyThi == IdKyThi1);
+            if(DateTime.Now<kt.NgayKetThuc)
+            {
+                ChiTietThiSinh tmp = db.ChiTietThiSinhs.FirstOrDefault(item => item.IdKyThi == IdKyThi1 && item.IdThiSinh == nd.MaKH);
+                tmp.Diem = point;
+                tmp.Dung = Acp;
+                tmp.Sai = Wr;
+                tmp.ChuaLam = ChuaLam;
+                db.SaveChanges();
+                ViewBag.SoCauHoi = AllQues;
+                return View(tmp);
+            } 
+            else
+            {
+                ChiTietThiSinh tmp = new ChiTietThiSinh();
+                tmp.Diem = point;
+                tmp.Dung = Acp;
+                tmp.Sai = Wr;
+                tmp.ChuaLam = ChuaLam;
+                db.SaveChanges();
+                ViewBag.SoCauHoi = AllQues;
+                return View(tmp);
+            }    
+            
         }
         /*Trang thi đấu end*/
     }

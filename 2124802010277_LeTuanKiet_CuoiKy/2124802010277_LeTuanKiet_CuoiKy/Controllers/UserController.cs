@@ -102,7 +102,7 @@ namespace _2124802010277_LeTuanKiet_CuoiKy.Controllers
             }
             else
             {
-                NguoiDung kh = db.NguoiDungs.SingleOrDefault(item => item.TenDN == TenDN && item.MatKhau == Password && item.Admin==true);
+                NguoiDung kh = db.NguoiDungs.SingleOrDefault(item => item.TenDN == TenDN && item.MatKhau == Password);
                 if (kh != null)
                 {
                     Session["TaiKhoan"] = kh;

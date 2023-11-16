@@ -63,6 +63,16 @@
     <Property Name="NgayKetThuc" Type="datetime" />
     <Property Name="TinhTrang" Type="bit" />
   </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdNguoiDung" Type="int" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="Gio" Type="datetime" />
+    <Property Name="RoomId" Type="int" />
+  </EntityType>
   <EntityType Name="NguoiDung">
     <Key>
       <PropertyRef Name="MaKH" />
@@ -93,6 +103,14 @@
     <Property Name="LuotThich" Type="int" />
     <Property Name="TrangThai" Type="bit" />
     <Property Name="NgayDang" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="RoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -134,8 +152,10 @@
     <EntitySet Name="ChiTietBaiTap" EntityType="Self.ChiTietBaiTap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChiTietThiSinh" EntityType="Self.ChiTietThiSinh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KyThi" EntityType="Self.KyThi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NguPhap" EntityType="Self.NguPhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CauHoi_KyThi" Association="Self.FK_CauHoi_KyThi">
       <End Role="KyThi" EntitySet="KyThi" />

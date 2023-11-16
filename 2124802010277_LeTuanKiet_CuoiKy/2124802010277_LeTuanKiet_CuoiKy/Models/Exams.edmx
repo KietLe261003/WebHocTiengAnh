@@ -68,6 +68,16 @@
           <Property Name="NgayKetThuc" Type="datetime" />
           <Property Name="TinhTrang" Type="bit" />
         </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdNguoiDung" Type="int" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="Gio" Type="datetime" />
+          <Property Name="RoomId" Type="int" />
+        </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
             <PropertyRef Name="MaKH" />
@@ -98,6 +108,14 @@
           <Property Name="LuotThich" Type="int" />
           <Property Name="TrangThai" Type="bit" />
           <Property Name="NgayDang" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomId" />
+          </Key>
+          <Property Name="RoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -139,8 +157,10 @@
           <EntitySet Name="ChiTietBaiTap" EntityType="Self.ChiTietBaiTap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietThiSinh" EntityType="Self.ChiTietThiSinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KyThi" EntityType="Self.KyThi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguPhap" EntityType="Self.NguPhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CauHoi_KyThi" Association="Self.FK_CauHoi_KyThi">
             <End Role="KyThi" EntitySet="KyThi" />
@@ -172,6 +192,8 @@
             <End Role="KyThi" EntitySet="KyThis" />
             <End Role="ChiTietThiSinh" EntitySet="ChiTietThiSinhs" />
           </AssociationSet>
+          <EntitySet Name="Messages" EntityType="DataTiengAnhModel.Message" />
+          <EntitySet Name="Rooms" EntityType="DataTiengAnhModel.Room" />
           </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -305,6 +327,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNguoiDung" Type="Int32" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gio" Type="DateTime" Precision="3" />
+          <Property Name="RoomId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomId" />
+          </Key>
+          <Property Name="RoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -420,6 +460,26 @@
                 <ScalarProperty Name="Ngay" ColumnName="Ngay" />
                 <ScalarProperty Name="TenKyThi" ColumnName="TenKyThi" />
                 <ScalarProperty Name="IdKyThi" ColumnName="IdKyThi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="DataTiengAnhModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="Gio" ColumnName="Gio" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="IdNguoiDung" ColumnName="IdNguoiDung" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="DataTiengAnhModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

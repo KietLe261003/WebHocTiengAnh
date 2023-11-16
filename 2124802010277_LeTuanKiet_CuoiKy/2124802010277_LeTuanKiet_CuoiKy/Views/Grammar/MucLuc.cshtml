@@ -2,11 +2,12 @@
 <ul class="list-group">
     @foreach (var item in Model)
     {
-        <li class="list-group-item active">
-            <a href="@Url.Action("DetailGrammar","Grammar",new {id=item.IdNguPhap})" style="color: white">
-                @item.TenNguPhap
-            </a>
-        </li>
-    }
+        <a href="@Url.Action("DetailGrammar","Grammar",new {id=item.IdNguPhap})" style="color: white">
+            <li class="list-group-item active">
 
+                @item.TenNguPhap
+
+            </li>
+        </a>
+    }
 </ul>
